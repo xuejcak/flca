@@ -1,0 +1,6 @@
+# input.txt. The line starting with # will be ignored.
+*indir /home/xuejc/data/181110/R040/test
+*outdir /home/xuejc/data/181110/R040/test_align
+*x0 250 *x1 650 *y0 150 *y1 550
+*every 1 *skip 10 *xoffset 5 *yoffset 5 *sigma 20
+*threshold 0.03a *kr 0.4 *biascorrect
