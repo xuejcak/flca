@@ -23,7 +23,7 @@ os.chdir('The directory where flca.py is')
 import flca
 flca.run('./input.txt') # or other filename.
 ```
-If you coalign files to those in the same channel one by one, the coalignment error for the nearby two files are small, but the files tend to move to a certain direction after coaligning tens of files. Then you need to sample some files and coalign them with other filtergrams, such as images from SDO/AIA. Record the file index (ref) and shifts (xm and ym) in detrend.py, and run it in Bash:
+If you coalign files to those in the same channel one by one, the coalignment error for the nearby two files are small, but the files tend to move to a certain direction after coaligning tens of files. Then you need to sample some files and coalign them with other filtergrams, such as images from SDO/AIA. Record the file index (ref) and shifts (xm and ym) in detrend.py, and run it in Bash
 ```bash
 python3 detrend.py
 ```
