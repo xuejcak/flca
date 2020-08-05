@@ -5,13 +5,13 @@ Fourier local correlation alignment (FLCA) is an efficient method for aligning i
 The FLCA is open-source, under the lesser GPL version 2.1 license. You are free to copy the code and use it as you like.
 
 ## Installation and run
-The core of the code is changed from the FLCT, and is written in C, which is called by the main Python code. The library fftw3 and Python modules numpy, astropy, skimage, ctypes are necessary. After editting the ./source/Makefile for the fftw3 path, you may enter the ./source directory and compile the C file in the terminal:
+The core of the code is changed from the FLCT, and is written in C, which is called by the main Python code. The library fftw3 and Python modules numpy, astropy, skimage, ctypes are necessary. After editting the ./source/Makefile for the fftw3 path, you may enter the ./source directory and compile the C file in Bash:
 ```bash
 cd (where flca.py is)/source
 make
 ```
 After that, there should be a new file ./source/flca.so.
-For running the code, you and use the GUI, or edit the input.txt and run flca using Python3. For the first mode, run the following code in the terminal
+For running the code, you and use the GUI, or edit the input.txt and run flca using Python3. For the first mode, run the following code in Bash
 ```bash
 python3 flca_gui.py
 ```
@@ -23,11 +23,11 @@ os.chdir('The directory where flca.py is')
 import flca
 flca.run('./input.txt') # or other filename.
 ```
-If you coalign files to those in the same channel one by one, the coalignment error for the nearby two files are small, but the files tend to move to a certain direction after coaligning tens of files. Then you need to sample some files and coalign them with other filtergrams, such as images from SDO/AIA. Record the file index (ref) and shifts (xm and ym) in detrend.py, and run it:
+If you coalign files to those in the same channel one by one, the coalignment error for the nearby two files are small, but the files tend to move to a certain direction after coaligning tens of files. Then you need to sample some files and coalign them with other filtergrams, such as images from SDO/AIA. Record the file index (ref) and shifts (xm and ym) in detrend.py, and run it in Bash:
 ```bash
 python3 detrend.py
 ```
-or
+or in Python
 ```python
 detrend
 ```
