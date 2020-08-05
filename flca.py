@@ -1,8 +1,6 @@
 '''
 flca.py
-created by Xue, J. C.
-Note:
-    time0a, time0b are recommended to be negative int numbers, *time0a -23 *time0b -8, as an example.
+created by Xue, xuejc@pmo.ac.cn
 History:
     2020-08-04: v0, created.
 '''
@@ -116,6 +114,7 @@ def run(inputf):
         return
     if os.path.exists(outdir) == False:
         os.mkdir(outdir)
+        print(f"{outdir} is created")
     if twochannel == 1:
         if indir0 == '':
             print('indir0 must be defined if twochannel is turned on.')
@@ -162,7 +161,7 @@ def onechannel(indir, outdir, firstfits='', x0=0, x1=-1, y0=0, y1=-1, every=1, s
     if outdir[-1] != '/': outdir += '/'
     filin = glob(indir+"*.f*ts")
     if len(filin) == 0:
-        print("The input folder (*indir) is empty!")
+        print(f"The input folder{indir} is empty!")
         return -1
     filin.sort()
     ind0 = 0
@@ -331,7 +330,7 @@ def onechannel(indir, outdir, firstfits='', x0=0, x1=-1, y0=0, y1=-1, every=1, s
             kk = kk+1
             if kk % every == 0:
                 data0 = data.copy()
-                referf = filin[ii]
+                #referf = filin[ii]
     np.savez_compressed('shiftxy.npz', sx=sxarr, sy=syarr)
     return 0
     
@@ -349,13 +348,13 @@ def doublechannel(indir0, indir, outdir, x0=0, x1=-1, y0=0, y1=-1, time0a=-23, t
     filin0 = glob(indir0+"*.f*ts")
     nfilin0 = len(filin0)
     if nfilin0 == 0:
-        print("The input folder (-indir0) is empty!")
+        print(f"The reference folder {indir0} is empty!")
         return -1
     filin0.sort()
     filin = glob(indir+"*.f*ts")
     nfilin = len(filin)
     if nfilin == 0:
-        print("The input folder (-indir) is empty!")
+        print(f"The input folder {indir} is empty!")
         return -1
     filin.sort()
     #ind0 = 0
