@@ -6,31 +6,31 @@ The FLCA is open-source, under the lesser GPL version 2.1 license. You are free 
 
 ## Installation and run
 The core of the code is changed from the FLCT, and is written in C, which is called by the main Python code. The library fftw3 and Python modules numpy, astropy, skimage, ctypes are necessary. After editting the ./source/Makefile for the fftw3 path, you may enter the ./source directory and compile the C file in the terminal:
-(''')
-$ cd (where flca.py is)/source
-$ make
-(''')
+```bash
+cd (where flca.py is)/source
+make
+```
 After that, there should be a new file ./source/flca.so.
 For running the code, you and use the GUI, or edit the input.txt and run flca using Python3. For the first mode, run the following code in the terminal
-(''')
-$ python3 flca_gui.py
-(''')
+```bash
+python3 flca_gui.py
+```
 or run flca_gui in Python IDLE, Jupyter notebook, spyder, etc.. You need to enter the required information and click "Single-channel coalignment" or "Double-channel coalignment". 
 For the second mode, you need to enter the information in the "input.txt" (or using other filename), and run the following codes in Python.
-(''')
->>> import os
->>> os.chdir('The directory where flca.py is')
->>> import flca
->>> flca.run('./input.txt') # or other filename.
-(''')
+```python
+import os
+os.chdir('The directory where flca.py is')
+import flca
+flca.run('./input.txt') # or other filename.
+```
 If you coalign files to those in the same channel one by one, the coalignment error for the nearby two files are small, but the files tend to move to a certain direction after coaligning tens of files. Then you need to sample some files and coalign them with other filtergrams, such as images from SDO/AIA. Record the file index (ref) and shifts (xm and ym) in detrend.py, and run it:
-(''')
-$ python3 detrend.py
-(''')
+```bash
+python3 detrend.py
+```
 or
-(''')
->>> detrend
-(''')
+```python
+detrend
+```
  The sampled files will be shifted as defined xm and ym, and other files are shifted linearly.
 
 ## Parameters and keywords
