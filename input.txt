@@ -1,6 +1,11 @@
-# input.txt. The line starting with # will be ignored.
+# input.txt for flca
+# Allowed parameters: *indir, *outdir, *firstfits, *x0, *x1, *y0, *y1,
+#     *every, *skip, *xoffset, *yoffset, *threshold, *kr
+#     (for double channel coalignment) *indir0, *time0a, *time0b, *time1a, *time1b
+# Allowed keywords: *biascorrect, *interpolate, *twochannel
+#
 *indir /home/xuejc/data/181110/R040/test
 *outdir /home/xuejc/data/181110/R040/test_align
-*x0 250 *x1 650 *y0 150 *y1 550
-*every 1 *skip 10 *xoffset 5 *yoffset 5 *sigma 20
-*threshold 0.03a *kr 0.4 *biascorrect
+*x0 250 *x1 650 *y0 150 y1 -1
+*every 1 *skip 10 *xoffset 5 *yoffset 5
+*sigma 30 *threshold 0 *kr 0.4 *biascorrect 
