@@ -33,6 +33,11 @@ detrend
 ```
  The sampled files will be shifted as defined xm and ym, and other files are shifted linearly.
 
+## GUI
+If there is a './input.txt' file, when you run flca_gui.py, './input.txt' will be read and parameters in the GUI are initialized. To save the setting in the GUI box, click "Create input.txt" beside the button "Single-channel coalignment" or the button with the same name beside "Double-channel coalignment". If you click the former "Create input.txt", the parameters set for double-channel coalignment are ignored. If you click the latter one, the keyword "twochannel" is set in the "./input.txt". If you do not save the parameters in the input.txt, you may lose them when you run flca_gui.py again.
+
+After setting the paramenters, click "Single-channel coalignment" or "Double-channel coalignment" to run the coalignment procedure.
+
 ## Parameters and keywords
 FLCA read the necessary information throught the GUI or "input.txt". The FLCA offer two choices for you, one is that files are coaligned to those in the same channel (Default, "Single-channel coalignment" in GUI), and the other is that files are coaligned to those beloning to the other channel (twochannel in "input.txt" or "Double-channel coalignment" in GUI). In the latter case, the files in the two channels must have the same pixel scale.
 In the single-channel case, the following parameters and keywords are available.
