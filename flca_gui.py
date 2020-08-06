@@ -24,54 +24,88 @@ if os.path.exists('./input.txt'):
     if tmp.count('*indir0'):
         ind = tmp.index('*indir0')
         if tmp[ind+1][0] != '*': indir0=tmp[ind+1]
+    else:
+        indir0 = ''
     if tmp.count('*indir'):
         ind = tmp.index('*indir')
         if tmp[ind+1][0] != '*': indir=tmp[ind+1]
+    else:
+        indir = ''
     if tmp.count('*outdir'):
         ind = tmp.index('*outdir')
         if tmp[ind+1][0] != '*': outdir=tmp[ind+1]
+    else:
+        outdir = ''
     if tmp.count('*firstfits'):
         ind = tmp.index('*firstfits')
         if tmp[ind+1][0] != '*': firstfits=tmp[ind+1]
+    else:
+        firstfits = ''
     if tmp.count('*x0'):
         ind = tmp.index('*x0')
         if tmp[ind+1][0] != '*': x0=int(tmp[ind+1])
+    else:
+        x0 = 0
     if tmp.count('*x1'):
         ind = tmp.index('*x1')
         if tmp[ind+1][0] != '*': x1=int(tmp[ind+1])
+    else:
+        x1 = -1
     if tmp.count('*y0'):
         ind = tmp.index('*y0')
         if tmp[ind+1][0] != '*': y0=int(tmp[ind+1])
+    else:
+        y0 = 0
     if tmp.count('*y1'):
         ind = tmp.index('*y1')
         if tmp[ind+1][0] != '*': y1=int(tmp[ind+1])
+    else:
+        y1 = -1
     if tmp.count('*time0a'):
         ind = tmp.index('*time0a')
         if tmp[ind+1][0] != '*': time0a=int(tmp[ind+1])
+    else:
+        time0a = ''
     if tmp.count('*time0b'):
         ind = tmp.index('*time0b')
         if tmp[ind+1][0] != '*': time0b=int(tmp[ind+1])
+    else:
+        time0b = ''
     if tmp.count('*time1a'):
         ind = tmp.index('*time1a')
         if tmp[ind+1][0] != '*': time1a=int(tmp[ind+1])
+    else:
+        time1a = ''
     if tmp.count('*time1b'):
         ind = tmp.index('*time1b')
         if tmp[ind+1][0] != '*': time1b=int(tmp[ind+1])
+    else:
+        time1b = ''
     if tmp.count('*every'):
         ind = tmp.index('*every')
         if tmp[ind+1][0] != '*': every=int(tmp[ind+1])
+    else:
+        every = 1
     if tmp.count('*skip'):
         ind = tmp.index('*skip')
         if tmp[ind+1][0] != '*': skip=int(tmp[ind+1])
+    else:
+        skip = 1
     if tmp.count('*xoffset'):
         ind = tmp.index('*xoffset')
         if tmp[ind+1][0] != '*': xoffset=int(tmp[ind+1])
+    else:
+        xoffset = 0
     if tmp.count('*yoffset'):
         ind = tmp.index('*yoffset')
         if tmp[ind+1][0] != '*': yoffset=int(tmp[ind+1])
+    else:
+        yoffset = 0
     if tmp.count('*sigma'):
         ind = tmp.index('*sigma')
         if tmp[ind+1][0] != '*': sigma=int(tmp[ind+1])
+    else:
+        sigma = ''
     if tmp.count('*threshold'):
         ind = tmp.index('*threshold')
         if tmp[ind+1][0] != '*': threshold=tmp[ind+1]
@@ -79,7 +113,10 @@ if os.path.exists('./input.txt'):
         ind = tmp.index('*kr')
         if tmp[ind+1][0] != '*':
             kr=float(tmp[ind+1])
-    if tmp.count('*biascorrect'): biascorrect=1
+    if tmp.count('*biascorrect'):
+        biascorrect = 1
+    else:
+        biascorrect = 0
     if tmp.count('*interpolate'): interpolate=1
     
 def browse_indir0():
@@ -107,6 +144,100 @@ def browse_firstf():
         return
     entfit.delete(0, tk.END)
     entfit.insert(0, tmp)
+def write_input(f):
+    indir = entin.get()
+    outdir = entout.get()
+    firstfits = entfit.get()
+    x0 = entx0.get()
+    x1 = entx1.get()
+    y0 = enty0.get()
+    y1 = enty1.get()
+    every = entevery.get()
+    skip = entskip.get()
+    xoffset = entxoffset.get()
+    yoffset = entyoffset.get()
+    sigma = entsigma.get()
+    threshold = entthreshold.get()
+    kr = entkr.get()
+    biascorrect = biastk.get()
+    interpolate = inptk.get()
+    f.write('# input.txt for flca\n')
+    f.write('# Allowed parameters: *indir, *outdir, *firstfits, *x0, *x1, *y0, *y1,\n')
+    f.write('#     *every, *skip, *xoffset, *yoffset, *threshold, *kr\n')
+    f.write('#     (for double channel coalignment) *indir0, *time0a, *time0b, *time1a, *time1b\n')
+    f.write('# Allowed keywords: *biascorrect, *interpolate, *twochannel\n')
+    f.write('# \n')
+    if indir != '':
+        stri = f'*indir {indir}\n'
+        f.write(stri)
+    if outdir != '':
+        stri = f'*outdir {outdir}\n'
+        f.write(stri)
+    if firstfits != '':
+        stri = f'*firstfits {firstfits}\n'
+        f.write(stri)
+    stri = ''
+    if x0 != '':
+        stri += f'*x0 {x0} '
+    if x1 != '':
+        stri += f'*x1 {x1} '
+    if y0 != '':
+        stri += f'*y0 {y0} '
+    if y1 != '':
+        stri += f'y1 {y1}'
+    stri += '\n'
+    f.write(stri)
+    stri = ''
+    if every != '':
+        stri += f'*every {every} '
+    if skip != '':
+        stri += f'*skip {skip} '
+    if xoffset != '':
+        stri += f'*xoffset {xoffset} '
+    if yoffset != '':
+        stri += f'*yoffset {yoffset}'
+    stri += '\n'
+    f.write(stri)
+    stri = ''
+    if sigma != '':
+        stri += f'*sigma {sigma} '
+    if threshold != '':
+        stri += f'*threshold {threshold} '
+    if kr != '':
+        stri += f'*kr {kr} '
+    if biascorrect == 1:
+        stri += '*biascorrect '
+    if interpolate == 1:
+        stri += '*interpolate'
+    stri += '\n'
+    f.write(stri)
+def write_onec():
+    f = open('./input.txt', 'w')
+    write_input(f)
+    f.close()
+def write_twoc():
+    f = open('./input.txt', 'w')
+    write_input(f)
+    indir0 = entin0.get()
+    time0a = entt0a.get()
+    time0b = entt0b.get()
+    time1a = entt1a.get()
+    time1b = entt1b.get()
+    if indir0 != '':
+        stri = f'*indir0 {indir0}\n'
+        f.write(stri)
+    stri = ''
+    if time0a != '':
+        stri += f'*time0a {time0a} '
+    if time0b != '':
+        stri += f'*time0b {time0b} '
+    if time1a != '':
+        stri += f'*time1a {time1a} '
+    if time1b != '':
+        stri += f'*time1b {time1b} '
+    stri += '*twochannel\n'
+    f.write(stri)
+    f.close()
 def run_onec():
     starttime = time.time()
     indir = entin.get()
@@ -323,14 +454,14 @@ cbtinp.grid(row=0,column=4, padx=7)
 cbtbias = tk.Checkbutton(frm03, text='biascorrect', variable=biastk, onvalue=1, offvalue=0)
 cbtbias.grid(row=0,column=3, padx=7)
 
-'''frm04 = tk.Frame(frm0)
+frm04 = tk.Frame(frm0)
 frm04.grid(row=5, column=0, ipadx=5, ipady=5, padx=10, pady=6)
-btncreate = tk.Button(frm04, text='Create input.txt')
+btncreate = tk.Button(frm04, text='Create input.txt', command=write_onec)
 btncreate.grid(row=0, column=0, ipadx=10)
-btnrun = tk.Button(frm04, text='Create and Run')
-btnrun.grid(row=0, column=1, padx=10, ipadx=10)'''
-btnrun = tk.Button(frm0, text='Single-channel coalignment', command=run_onec)
-btnrun.grid(row=5, column=0, ipadx=10)
+btnrun = tk.Button(frm04, text='Single-channel coalignment', command=run_onec)
+btnrun.grid(row=0, column=1, padx=10, ipadx=10)
+'''btnrun = tk.Button(frm0, text='Single-channel coalignment', command=run_onec)
+btnrun.grid(row=5, column=0, ipadx=10)'''
 
 frm05 = tk.Frame(master=frm0, relief=tk.SUNKEN, borderwidth=3)
 frm05.grid(row=6, column=0, pady=6)
@@ -373,8 +504,14 @@ entt1b.insert(0, time1b)
 lblt1b.grid(row=0,column=0)
 entt1b.grid(row=0,column=1)
 
-btnrun2 = tk.Button(frm0, text='Double-channel coalignment', command=run_twoc)
-btnrun2.grid(row=8, column=0, ipadx=10)
+frm07 = tk.Frame(frm0)
+frm07.grid(row=8, column=0, ipadx=5, ipady=5, padx=10, pady=6)
+btncreate = tk.Button(frm07, text='Create input.txt', command=write_twoc)
+btncreate.grid(row=0, column=0, ipadx=10)
+btnrun = tk.Button(frm07, text='Double-channel coalignment', command=run_twoc)
+btnrun.grid(row=0, column=1, padx=10, ipadx=10)
+'''btnrun2 = tk.Button(frm0, text='Double-channel coalignment', command=run_twoc)
+btnrun2.grid(row=8, column=0, ipadx=10)'''
 
 #frm1=tk.Frame(master=win, width=400, height=400, relief=tk.SUNKEN, borderwidth=3)
 #frm1.grid(row=0, column=1)
